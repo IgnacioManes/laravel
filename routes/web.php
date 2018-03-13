@@ -30,4 +30,8 @@ Route::post('/proyecto/store', 'ProyectoController@store')->name('proyecto.store
 Route::get('/proyecto/suscripcion/{id}', 'ProyectoController@suscripcion')->name('proyecto.suscripcion');
 Route::get('/proyecto/desuscripcion/{id}', 'ProyectoController@desuscripcion')->name('proyecto.desuscripcion');
 
+Route::get('/admin/empleado/{id}', 'ProyectoController@listar')->name('proyecto.empleado');
+Route::get('/admin/DireccionesGenerales', 'DireccionGeneralController@index')->name('dg.index');
+Route::get('/admin/DireccionesGenerales/{id}', 'EmpleadoController@show')->name('dg.detalle');
+
 Route::post('/user/destroy', 'UserController@destroy')->name('user.destroy');

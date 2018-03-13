@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Empleado;
-use App\Proyecto;
+use App\DireccionGeneral;
 use Illuminate\Http\Request;
 
-class ProyectoController extends Controller
+class DireccionGeneralController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,8 @@ class ProyectoController extends Controller
      */
     public function index()
     {
-       $proyectos=Proyecto::all();
-        return view('lista_proyecto',compact("proyectos"));
+        $dgs=DireccionGeneral::all();
+        return view('direcciones_generales',compact("dgs"));
     }
 
     /**
@@ -26,7 +25,7 @@ class ProyectoController extends Controller
      */
     public function create()
     {
-        return view('proyecto');
+        //
     }
 
     /**
@@ -37,16 +36,7 @@ class ProyectoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|max:25',
-            'fecha_entrega' => 'required|date',
-        ]);
-
-        $proyecto = new Proyecto();
-        $proyecto->nombre = $request->nombre;
-        $proyecto->fecha_entrega = $request->fecha_entrega;
-        $proyecto->save();
-        return redirect("/home")->with("message", "Proyecto creado!");
+        //
     }
 
     /**
@@ -59,29 +49,6 @@ class ProyectoController extends Controller
     {
         //
     }
-
-    public function suscripcion(Request $request, $id)
-    {
-        $user =$request->user();
-        $empleado = $user->empleado()->first();
-        $empleado->proyectos()->attach($id);
-        return redirect()->back()->with("message", "Proyecto asignado!");
-    }
-
-    public function desuscripcion(Request $request, $id)
-    {
-        $user =$request->user();
-        $empleado = $user->empleado()->first();
-        $empleado->proyectos()->detach($id);
-        return redirect()->back()->with("message", "Proyecto desasignado!");
-    }
-
-    public function listar(Request $request, $id)
-    {
-        $empleado =Empleado::with("proyectos")->find($request->id);
-        return view('proyectos_empleado',compact("empleado"));
-    }
-
 
     /**
      * Show the form for editing the specified resource.

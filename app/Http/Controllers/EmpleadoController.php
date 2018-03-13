@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DireccionGeneral;
 use App\Empleado;
+use function foo\func;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -37,7 +38,7 @@ class EmpleadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    /*public function store(Request $request)
     {
         $request->validate([
             'nombre' => 'required|max:25',
@@ -57,7 +58,7 @@ class EmpleadoController extends Controller
         $user->empleado()->save($empleado);
 
         return redirect("/home")->with("message", "Perfil creado");
-    }
+    }*/
 
     /**
      * Show the form for editing the specified resource.
@@ -109,9 +110,18 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-        //
+        $dg=DireccionGeneral::with("empleados")->find($request->id);
+
+        //para traer de una relacion con alguna condicion
+        /*$dg=DireccionGeneral::with(["empleados" => function($q){
+            return $q->where("id",4);
+        }])->find($request->id);*/
+
+        //asi no va
+        //$empleados=Empleado::select('id','nombre','apellido','documento')->where('id_dg','=',$request->id)->get();
+        return view('direccionGral', compact("dg"));
     }
 
     /**

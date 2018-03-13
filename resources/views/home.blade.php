@@ -19,15 +19,9 @@
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">Perfil</div>
-                @if(Auth::user()->empleado()->first())
-                    <div class="panel-body">
-                        <a href="{{route("empleado.edit")}}"><button type="button" class="btn btn-primary">Editar Perfil</button></a>
-                    </div>
-                @else
-                    <div class="panel-body">
-                        <a href="{{route("empleado.create")}}"><button type="button" class="btn btn-primary">Crear Perfil</button></a>
-                    </div>
-                @endif
+                <div class="panel-body">
+                    <a href="{{route("empleado.edit")}}"><button type="button" class="btn btn-primary">Editar Perfil</button></a>
+                </div>
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">Crear Proyectos</div>
@@ -35,6 +29,22 @@
                     <a href="{{route("proyecto.create")}}"><button type="button" class="btn btn-primary">Crear Proyecto</button></a>
                 </div>
             </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">Mis Proyectos</div>
+
+                <div class="panel-body">
+                    <a href="{{route("proyecto.index")}}"><button type="button" class="btn btn-primary">Mis Proyectos</button></a>
+                </div>
+            </div>
+            @if(isset(Auth::user()->admin))
+                <div class="panel panel-default">
+                    <div class="panel-heading">Direcciones Generales</div>
+
+                    <div class="panel-body">
+                        <a href="{{route("dg.index")}}"><button type="button" class="btn btn-primary">Direcciones Generales</button></a>
+                    </div>
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Mis Proyectos</div>
 
